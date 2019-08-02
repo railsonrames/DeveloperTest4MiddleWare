@@ -16,7 +16,7 @@ namespace Challenge.Api.Controllers
         [Route("list")]
         public ActionResult<IEnumerable<RecordObjectModel>> MainRecords()
         {
-            if (!System.IO.File.Exists("dataArchive.csv"))
+            if (System.IO.File.Exists("dataArchive.csv"))
             {
                 int counter = 0;
                 List<RecordObjectModel> recordObjectsList = new List<RecordObjectModel>();
@@ -43,7 +43,7 @@ namespace Challenge.Api.Controllers
             }
             else
             {
-                return BadRequest();
+                return BadRequest("Não existe arquivo CSV criado, verifique se o POST JSON já foi realizado.");
             }
         }
 
