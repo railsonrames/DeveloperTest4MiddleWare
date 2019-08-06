@@ -5,6 +5,9 @@
             url: "http://localhost:9001/api/records/list/",
             success: function (data) {
                 $('#insertPoint').html(setDataTable(data));
+            },
+            error: function (request, status, error) {
+                alert(`${error}: ${request.responseText}`);
             }
         });
     });

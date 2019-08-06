@@ -26,10 +26,10 @@ namespace Challenge.Api.Controllers
                     {
                         while (!reader.EndOfStream)
                         {
-                            string[] line = reader.ReadLine().Split('\t');
+                            string[] attributes = reader.ReadLine().Split(';');
                             if (counter++ > 0)
                             {
-                                var record = new RecordObjectModel { Id = int.Parse(line[0]), Name = line[1], Status = bool.Parse(line[2]) };
+                                var record = new RecordObjectModel { Id = int.Parse(attributes[0]), Name = attributes[1], Status = bool.Parse(attributes[2]) };
                                 recordObjectsList.Add(record);
                             }
                         }
@@ -38,7 +38,7 @@ namespace Challenge.Api.Controllers
                 }
                 catch (Exception excep)
                 {
-                    throw new ApplicationException($"Ocorreu um erro ao ler os dados no arquivo CSV, causados por: {excep}");
+                    return BadRequest($"Ocorreu um erro ao ler os dados no arquivo CSV, causado por {excep.Message}");
                 }
             }
             else
